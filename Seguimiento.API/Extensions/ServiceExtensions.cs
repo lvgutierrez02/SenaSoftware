@@ -2,6 +2,7 @@
 using Entities;
 using LoggerService;
 using Microsoft.EntityFrameworkCore;
+using Repository;
 
 namespace Seguimiento.API.Extensions
 {
@@ -31,6 +32,8 @@ namespace Seguimiento.API.Extensions
             services.AddDbContext<RepositoryContext>(opts => opts.UseSqlServer(configuration.GetConnectionString("sqlConnection")));
 
 
+        //Se agrega el administrador de Repository
+        public static void ConfigureRepositoryManager(this IServiceCollection services) => services.AddScoped<IRepositoryManager, RepositoryManager>();
 
         public static void ConfigureLoggerService(this IServiceCollection services)
         {

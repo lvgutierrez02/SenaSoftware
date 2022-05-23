@@ -18,6 +18,8 @@ var configuration = builder.Configuration;
 
 builder.Services.ConfigureSqlContext(configuration); //Agregando el metodo que contiene la conexion con la DB 
 
+builder.Services.ConfigureRepositoryManager(); //Se agrega el admin repository como servicio
+
 builder.Services.AddControllers();
 
 var app = builder.Build();
