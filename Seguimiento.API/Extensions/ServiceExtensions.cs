@@ -1,9 +1,11 @@
 ﻿using Contracts;
+using Entities;
 using LoggerService;
+using Microsoft.EntityFrameworkCore;
 
 namespace Seguimiento.API.Extensions
 {
-    public static class ServiceExtensions 
+    public static class ServiceExtensions  //contenedor de inyección de dependencias de la aplicación
     {
 
         //CORS: Cross-Origin Resource Sharing =  //es un mecanismo para dar o restringir derechos de acceso a aplicaciones de diferentes dominios.
@@ -17,17 +19,23 @@ namespace Seguimiento.API.Extensions
          });
 
         //configura una integración con IIS que nos ayudará finalmente con el despliegue en IIS
-        public static void ConfigureIISIntegration(this IServiceCollection services) //
+        public static void ConfigureIISIntegration(this IServiceCollection services) 
         {
             services.Configure<IISOptions>(options =>
             {
             });
         }
 
+        //
+        public static void ConfigureSqlContext(this IServiceCollection services, IConfiguration configuration) =>
+            services.AddDbContext<RepositoryContext>(opts => opts.UseSqlServer(configuration.GetConnectionString("sqlConnection")));
+
+
+
         public static void ConfigureLoggerService(this IServiceCollection services)
         {
-            services.AddSingleton<ILoggerManager, LoggerManager>(); //crear un servicio la primera vez que lo solicitamos y
-                                                                    //luego cada solicitud posterior llamará a la misma instancia del servicio.
+            services.AddSingleton<ILoggerManager, LoggerManager>();
+            //crear un servicio la primera vez que lo solicitamos y luego cada solicitud posterior llamará a la misma instancia del servicio.
         }
     }
 }

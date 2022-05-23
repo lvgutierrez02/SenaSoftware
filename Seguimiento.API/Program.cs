@@ -14,6 +14,9 @@ builder.Services.ConfigureIISIntegration();
 
 builder.Services.ConfigureLoggerService(); //se agrega el servicio de registro
 
+var configuration = builder.Configuration;
+
+builder.Services.ConfigureSqlContext(configuration); //Agregando el metodo que contiene la conexion con la DB 
 
 builder.Services.AddControllers();
 
