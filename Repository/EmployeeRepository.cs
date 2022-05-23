@@ -11,6 +11,7 @@ namespace Repository
 {
     public class EmployeeRepository : RepositoryBase<Employee>, IEmployeeRepository
     {
+        //tiene acceso a todos los métodos del Repositorio base
         public EmployeeRepository(RepositoryContext repositoryContext) :
             base(repositoryContext)
         {

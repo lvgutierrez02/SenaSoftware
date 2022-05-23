@@ -11,7 +11,9 @@ namespace Repository
 {
     public class CompanyRepository : RepositoryBase<Company>, ICompanyRepository
     {
-        public CompanyRepository(RepositoryContext repositoryContext) : base(repositoryContext)
+        //tiene acceso a todos los métodos del Repositorio base
+        public CompanyRepository(RepositoryContext repositoryContext) : 
+            base(repositoryContext)
         {
         }
     }
