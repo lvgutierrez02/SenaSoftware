@@ -15,13 +15,16 @@ namespace Entities
             : base(options)
         {
         }
-        //Esto lo utilizamos para llenar las tablas (seeder) al ejecutar la migración
+
+        //Esto lo utilizamos para llenar las tablas (seeder) al ejecutar la migración.
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new CompanyConfiguration());
             modelBuilder.ApplyConfiguration(new EmployeeConfiguration());
         }
-        public DbSet<Company> Companies { get; set; }
+
+        //DbSet: Representa una tabla en la base de datos
+        public DbSet<Company> Companies { get; set; } 
         public DbSet<Employee> Employees { get; set; }
     }
 }
