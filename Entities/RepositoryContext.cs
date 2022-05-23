@@ -15,7 +15,8 @@ namespace Entities
             : base(options)
         {
         }
-        protected override void OnModelCreating(ModelBuilder modelBuilder)//Ingresa datos a las tablas al ejecutar la migración
+        //Esto lo utilizamos para llenar las tablas (seeder) al ejecutar la migración
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new CompanyConfiguration());
             modelBuilder.ApplyConfiguration(new EmployeeConfiguration());
