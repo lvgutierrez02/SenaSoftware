@@ -25,7 +25,7 @@ namespace Seguimiento.API.Controllers
         {
             var companies = _repository.Company.GetAllCompanies(trackChanges: false);
             var companiesDto = _mapper.Map<IEnumerable<CompanyDto>>(companies);
-            throw new Exception("Exception");
+            //throw new Exception("Exception");
             return Ok(companiesDto);
            
 
@@ -38,12 +38,12 @@ namespace Seguimiento.API.Controllers
             if (company == null)
             {
                 _logger.LogInfo($"Company with id: {id} doesn't exist in the database.");
-                return NotFound();
+                return NotFound(); //es para el resultado NotFound (código de estado 404).
             }
             else
             {
                 var companyDto = _mapper.Map<CompanyDto>(company);
-                return Ok(companyDto);
+                return Ok(companyDto); //es para el buen resultado (código de estado 200)
             }
         }
 
