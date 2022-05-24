@@ -1,5 +1,6 @@
 ﻿using Contracts;
 using Entities;
+using Entities.DTO;
 using Entities.Models;
 using System;
 using System.Collections.Generic;
@@ -18,5 +19,7 @@ namespace Repository
         }
 
         public IEnumerable<Company> GetAllCompanies(bool trackChanges) => FindAll(trackChanges).OrderBy(c => c.Name).ToList();
+
+       
     }
 }

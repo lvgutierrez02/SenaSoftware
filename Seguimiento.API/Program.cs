@@ -1,3 +1,4 @@
+using AutoMapper;
 using Microsoft.AspNetCore.HttpOverrides;
 using NLog; //NLog es una plataforma de registro para .NET que nos ayudará a crear y registrar nuestros mensajes
 using Seguimiento.API.Extensions;
@@ -19,6 +20,8 @@ var configuration = builder.Configuration;
 builder.Services.ConfigureSqlContext(configuration); //Agregando el metodo que contiene la conexion con la DB 
 
 builder.Services.ConfigureRepositoryManager(); //Se agrega el admin repository como servicio
+
+builder.Services.AddAutoMapper(typeof(Program));
 
 builder.Services.AddControllers();
 
