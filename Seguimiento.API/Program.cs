@@ -1,6 +1,6 @@
-using AutoMapper;
+﻿using AutoMapper;
 using Microsoft.AspNetCore.HttpOverrides;
-using NLog; //NLog es una plataforma de registro para .NET que nos ayudar� a crear y registrar nuestros mensajes
+using NLog; //NLog es una plataforma de registro para .NET que nos ayudará a crear y registrar nuestros mensajes
 using Seguimiento.API.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -24,6 +24,19 @@ builder.Services.ConfigureRepositoryManager(); //Se agrega el admin repository c
 builder.Services.AddAutoMapper(typeof(Program));
 
 
+//builder.Services.AddControllers(config => //Anula la configuracion donde formatea una respuesta a JSON
+//{
+//    config.RespectBrowserAcceptHeader = true; //decirle al servidor que respete la cabecera Accept
+
+//    //Indica al servidor que si el cliente intenta negociar para el tipo de medio que el tipo de medio que el servidor no soporta, debe devolver el codigo
+//    //de estado 406 Not Acceptable No aceptable.Esto hara que nuestra aplicaci�n sea m�s restrictiva y obligario al consumidor de la API a solicitar solo los tipos
+//    //que el servidor admite. El codigo de estado 406 se ha creado con este prop�sito.
+//    //config.ReturnHttpNotAcceptable = true;  
+//    //builder.Services.AddControllers(config => //Anula la configuracion donde formatea una respuesta a JSON
+//    //{
+//    //    config.RespectBrowserAcceptHeader = true; //decirle al servidor que respete la cabecera Accept
+
+//}).AddXmlDataContractSerializerFormatters(); //para soportar los formateadores XML
 
 
 

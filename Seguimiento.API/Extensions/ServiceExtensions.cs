@@ -32,10 +32,7 @@ namespace Seguimiento.API.Extensions
         public static void ConfigureSqlContext(this IServiceCollection services, IConfiguration configuration) =>
             services.AddDbContext<RepositoryContext>(opts => opts.UseSqlServer(configuration.GetConnectionString("sqlConnection")));
 
-        //public static void ConfigureAutoMapper(this IServiceCollection services)
-        //{
-        //    services.AddSingleton<MappingProfile>(); 
-        //}
+        
 
         //Se agrega el administrador de Repository
         public static void ConfigureRepositoryManager(this IServiceCollection services) => services.AddScoped<IRepositoryManager, RepositoryManager>();

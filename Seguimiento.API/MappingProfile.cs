@@ -19,6 +19,7 @@ namespace Entities.AutoMapper
             opt => opt.MapFrom(x => string.Join(' ', x.Address, x.Country))); //reglas de mapeo adicionales
 
             CreateMap<Employee, EmployeeDto>();
+            CreateMap<CompanyForCreationDto, Company>();
         }
 
        
