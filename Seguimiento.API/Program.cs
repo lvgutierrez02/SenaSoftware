@@ -23,16 +23,8 @@ builder.Services.ConfigureRepositoryManager(); //Se agrega el admin repository c
 
 builder.Services.AddAutoMapper(typeof(Program));
 
-//builder.Services.AddControllers(config => //Anula la configuración dónde formatea una respuesta a JSON
-//{
-//    config.RespectBrowserAcceptHeader = true; //decirle al servidor que respete la cabecera Accept
 
-//   //Indica al servidor que si el cliente intenta negociar para el tipo de medio que el tipo de medio que el servidor no soporta, debe devolver el código
-//   //de estado 406 Not Acceptable No aceptable.Esto hará que nuestra aplicación sea más restrictiva y obligará al consumidor de la API a solicitar sólo los tipos
-//   //que el servidor admite. El código de estado 406 se ha creado con este propósito.
-//   //config.ReturnHttpNotAcceptable = true;  
 
-//}).AddXmlDataContractSerializerFormatters(); //para soportar los formateadores XML
 
 
 builder.Services.AddControllers();
