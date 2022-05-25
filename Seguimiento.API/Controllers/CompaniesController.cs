@@ -21,7 +21,7 @@ namespace Seguimiento.API.Controllers
         }
 
 
-        [HttpGet("{id}", Name = "CompanyById")]
+        [HttpGet("{id}")]
         public IActionResult GetCompanies()
         {
             var companies = _repository.Company.GetAllCompanies(trackChanges: false);
@@ -32,7 +32,7 @@ namespace Seguimiento.API.Controllers
 
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("{id}", Name = "CompanyById")]
         public IActionResult GetCompany(Guid id)
         {
             var company = _repository.Company.GetCompany(id, trackChanges: false);
