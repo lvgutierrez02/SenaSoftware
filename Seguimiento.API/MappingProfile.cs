@@ -17,6 +17,10 @@ namespace Entities.AutoMapper
             CreateMap<Company, CompanyDto>() //especificamos el objeto de origen y el objeto de destino para mapea
             .ForMember(c => c.FullAddress,
             opt => opt.MapFrom(x => string.Join(' ', x.Address, x.Country))); //reglas de mapeo adicionales
+
+            CreateMap<Employee, EmployeeDto>();
         }
+
+       
     }
 }
