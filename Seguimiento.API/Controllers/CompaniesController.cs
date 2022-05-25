@@ -21,7 +21,7 @@ namespace Seguimiento.API.Controllers
         }
 
 
-        [HttpGet("{id}")]
+        [HttpGet]
         public IActionResult GetCompanies()
         {
             var companies = _repository.Company.GetAllCompanies(trackChanges: false);
