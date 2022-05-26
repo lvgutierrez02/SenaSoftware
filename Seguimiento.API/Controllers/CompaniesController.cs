@@ -29,7 +29,6 @@ namespace Seguimiento.API.Controllers
             //throw new Exception("Exception");
             return Ok(companiesDto);
            
-
         }
 
         [HttpGet("{id}", Name = "CompanyById")]
@@ -47,25 +46,28 @@ namespace Seguimiento.API.Controllers
                 return Ok(companyDto); //es para el buen resultado (código de estado 200)
             }
         }
+         
 
-
-        [HttpPost]
-        public IActionResult CreateCompany([FromBody] CompanyForCreationDto company)
+        [HttpPost]//restringe a las peticiones POST
+        public IActionResult CreateCompany([FromBody] CompanyForCreationDto company) //el parámetro que proviene del cliente en el cuerpo de la petición [FromBody]
         {
             if (company == null)
             {
                 _logger.LogError("CompanyForCreationDto object sent from client is null.");
 
-              
+                
             return BadRequest("CompanyForCreationDto object is null");
             }
-            var companyEntity = _mapper.Map<Company>(company);
-            _repository.Company.CreateCompany(companyEntity);
-            _repository.Save();
-            var companyToReturn = _mapper.Map<CompanyDto>(companyEntity);
-            return CreatedAtRoute("CompanyById", new { id = companyToReturn.Id },
-           companyToReturn);
+            var companyEntity = _mapper.Map<Company>(company); //mapeamos la empresa para su creación a la entidad empresa
+            _repository.Company.CreateCompany(companyEntity);//lamamos al método del repositorio para la creación
+            _repository.Save();//guardar la entidad en la base de datos
+            var companyToReturn = _mapper.Map<CompanyDto>(companyEntity); //asignamos la entidad empresa al objeto DTO empresa para devolverlo al cliente
+
+            //devolverá un código de estado 201, que significa Creado. Rellenará el cuerpo de la respuesta con el nuevo objeto así como el atributo Location dentro de la cabecera
+            //de la respuesta con la dirección para recuperar esa empresa.Tenemos que proporcionar el nombre de la acción, donde podemos recuperar la entidad creada.
+            return CreatedAtRoute("CompanyById", new { id = companyToReturn.Id },companyToReturn); //
         }
+
 
 
     }
