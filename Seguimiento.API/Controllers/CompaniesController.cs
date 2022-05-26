@@ -4,6 +4,8 @@ using Entities.DTO;
 using Entities.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding.Binders;
+using Seguimiento.API.ModelBinders;
 
 namespace Seguimiento.API.Controllers
 {
@@ -48,22 +50,7 @@ namespace Seguimiento.API.Controllers
         }
 
         [HttpGet("collection/({ids})", Name = "CompanyCollection")]
-        public IActionResult GetCompanyCollection(IEnumerable<Guid> ids)
-        {
-            if (ids == null)
-            {
-                _logger.LogError("Parameter ids is null");
-                return BadRequest("Parameter ids is null");
-            }
-            var companyEntities = _repository.Company.GetByIds(ids, trackChanges: false);
-            if (ids.Count() != companyEntities.Count())
-            {
-                _logger.LogError("Some ids are not valid in a collection");
-                return NotFound();
-            }
-            var companiesToReturn = _mapper.Map<IEnumerable<CompanyDto>>(companyEntities);
-            return Ok(companiesToReturn);
-        }
+        public IActionResult GetCompanyCollection([ModelBinder(BinderType =typeof(ArrayModelBinder))]IEnumerable<Guid> ids);
 
 
         [HttpPost]//restringe a las peticiones POST
