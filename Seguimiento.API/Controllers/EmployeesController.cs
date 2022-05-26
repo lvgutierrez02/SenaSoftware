@@ -39,7 +39,7 @@ namespace Seguimiento.API.Controllers
             return Ok(employeesDto);
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("{id}", Name = "GetEmployeeForCompany")]
         public IActionResult GetEmployeeForCompany(Guid companyId, Guid id)
         {
             var company = _repository.Company.GetCompany(companyId, trackChanges: false);
