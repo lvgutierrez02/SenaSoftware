@@ -49,8 +49,8 @@ namespace Seguimiento.API.Controllers
             }
         }
 
-        [HttpGet("collection/({ids})", Name = "CompanyCollection")]
-        public IActionResult GetCompanyCollection([ModelBinder(BinderType =typeof(ArrayModelBinder))]IEnumerable<Guid> ids);
+        //[HttpGet("collection/({ids})", Name = "CompanyCollection")]
+        //public IActionResult GetCompanyCollection([ModelBinder(BinderType = typeof(ArrayModelBinder))] IEnumerable<Guid> ids);
 
 
         [HttpPost]//restringe a las peticiones POST
@@ -59,11 +59,11 @@ namespace Seguimiento.API.Controllers
             if (company == null)
             {
                 _logger.LogError("CompanyForCreationDto object sent from client is null.");
-
-                
-            return BadRequest("CompanyForCreationDto object is null");
+                return BadRequest("CompanyForCreationDto object is null");
             }
             var companyEntity = _mapper.Map<Company>(company); //mapeamos la empresa para su creación a la entidad empresa
+
+
             _repository.Company.CreateCompany(companyEntity);//lamamos al método del repositorio para la creación
             _repository.Save();//guardar la entidad en la base de datos
             var companyToReturn = _mapper.Map<CompanyDto>(companyEntity); //asignamos la entidad empresa al objeto DTO empresa para devolverlo al cliente
@@ -94,6 +94,19 @@ namespace Seguimiento.API.Controllers
             return CreatedAtRoute("CompanyCollection", new { ids },companyCollectionToReturn); //navegamos a la acción GET para obtener nuestras colección empresas creadas
         }
 
+        [HttpDelete("{id}")]
+        public IActionResult DeleteCompany(Guid id)
+        {
+            var company = _repository.Company.GetCompany(id, trackChanges: false);
+            if (company == null)
+            {
+                _logger.LogInfo($"Company with id: {id} doesn't exist in the database.");
+                return NotFound();
+            }
+            _repository.Company.DeleteCompany(company);
+            _repository.Save();
+            return NoContent();
+        }
 
 
     }
